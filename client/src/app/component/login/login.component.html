@@ -1,0 +1,51 @@
+
+
+<br>
+<br>
+<div style=" border-radius:10px ; border-color: blue; border-style: double; background-color: rgb(17, 16, 16); color: white; width: 10cm; height: 7cm; align-items: center; margin-left: 9cm; background-color: rgb(16, 17, 17);"> 
+
+
+  <form class ="form" #userLogin='ngForm' (ngSubmit)=loginUser()>
+    <h4 style="text-align: center; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Login</h4>
+
+
+
+
+    
+                       <div class="input-group mb-2">
+                               
+           <input [(ngModel)]="loginUserData.email" type="text" name="email" class="form-control input_pass" value=""   #email="ngModel" [class.is-invalid]="email.invalid && email.touched" value="" placeholder="Email-id" 
+                                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                               
+                           
+                </div>
+                
+                <div class="input-group mb-2">
+                                <div class="input-group-append">
+                                    <!-- <span class="input-group-text"><i class="fas fa-key"></i></span> -->
+                                    <br>
+                                </div>
+                               
+                              
+                                <input [(ngModel)]="loginUserData.password" type="password" name="password"  class="form-control input_pass" value="" placeholder="password" 
+                                 #password="ngModel" [class.is-invalid]="password.invalid && password.touched" 
+                                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$"  required>
+                            
+                               
+                </div>
+                <br>    
+     <button (click) = "loginUser()"  [disabled]="userLogin.form.invalid" type="button" name="button" class="btn btn-success login_btn">Login</button>
+                       
+                        </form>
+                    <!-- </div> -->
+		
+				<div class="mt-4">
+					
+						Don't have an account? <a href="/register" class="ml-2">Register</a>
+					<!-- </div> -->
+					<div class="d-flex justify-content-center links">
+						<a href="register">Forgot your password?</a>
+					</div>
+				</div>
+            </div>
+      
