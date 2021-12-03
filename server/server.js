@@ -8,6 +8,7 @@ const AuthorData = require('./models/authordata');
 const User = require('./models/user');
 
 
+    
 
 const db ="mongodb+srv://jamsheela:jamsheela@books.ctiie.mongodb.net/jamsheelaretryWrites=true&w=majority";
 mongoose.connect(db,err=>{
@@ -27,11 +28,19 @@ app.use(cors());
 app.use(express.static('./public'));
 app.use(express.json());
 
-app.use('/book',bookController);
-app.use('/author',authorController);
 
 
-app.get('/books',function(req,res){
+// hosting
+
+const path = require('path');
+app.use(express.static('./dist/client'));
+
+app.use('/api/book',bookController);
+app.use('/api/author',authorController);
+   
+// hosting end
+
+app.get('/api/books',function(req,res){
     res.header("Access-Control-Allow-Origin","*")
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS')
     BookData.find()
@@ -41,7 +50,7 @@ app.get('/books',function(req,res){
           });
 });
 
-app.get('/authors',function(req,res){
+app.get('/api/authors',function(req,res){
     res.header("Access-Control-Allow-Origin","*")
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS')
     AuthorData.find()
@@ -51,7 +60,7 @@ app.get('/authors',function(req,res){
           });
 });
 
-app.post('/insert',function(req,res){
+app.post('/api/insert',function(req,res){
     res.header("Access-Control-Allow-Origin","*")
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS')
     console.log(req.body);
@@ -71,7 +80,7 @@ var book = new BookData(book);
 book.save();
 });
 
-app.post('/insertauth',function(req,res){
+app.post('/api/insertauth',function(req,res){
     res.header("Access-Control-Allow-Origin","*")
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS')
     console.log(req.body);
@@ -91,7 +100,7 @@ author.save();
 
 
 
-app.post('/edit',function(req,res){
+app.post('/api/edit',function(req,res){
     res.header("Access-Control-Allow-Origin","*");
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS');
     console.log(req.body);
@@ -120,7 +129,7 @@ BookData.updateOne(
      
 });
 
-app.post('/editauth',function(req,res){
+app.post('/api/editauth',function(req,res){
     res.header("Access-Control-Allow-Origin","*");
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS');
     console.log(req.body);
@@ -147,7 +156,7 @@ AuthorData.updateOne(
 
 
 
-app.post('/delete',function(req,res){
+app.post('/api/delete',function(req,res){
     res.header("Access-Control-Allow-Origin","*");
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS');
     console.log(req.body);
@@ -173,7 +182,7 @@ BookData.deleteOne(
 
 });
 
-app.post('/deleteauth',function(req,res){
+app.post('/api/deleteauth',function(req,res){
     res.header("Access-Control-Allow-Origin","*");
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS');
     console.log(req.body);
@@ -199,7 +208,7 @@ AuthorData.deleteOne(
 
 
 
-app.post('/register',function(req,res){
+app.post('/api/register',function(req,res){
     res.header("Access-Control-Allow-Origin","*")
     res.header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS")
      let userData= req.body;
@@ -218,7 +227,7 @@ app.post('/register',function(req,res){
 
 })
 
-app.post('/login',(req,res)=>{
+app.post('/api/login',(req,res)=>{
     let userData =req.body;
     User.findOne({email: userData.email},(err,user)=>{
         if(err)
@@ -251,6 +260,9 @@ app.post('/login',(req,res)=>{
 
 })
 
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/client/index.html'));
+   });
 
     app.listen(3000,function(){
         console.log('server ready at port 3000');
