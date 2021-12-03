@@ -20,7 +20,7 @@ export class EditAuthorComponent implements OnInit {
 
   editAuthor(){
     this.booksService.editAuthor(this.authorItem)
-    console.log("hi for, editauthor and the corresponding author name is " + this.authorItem.authorName);
+    console.log(" editauthor and the corresponding author name is " + this.authorItem.authorName);
     alert("edited")
     this.router.navigate(['/authors'])
   }

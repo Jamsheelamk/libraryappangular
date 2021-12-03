@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import {Observable} from 'rxjs';
-
-
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/toPromise'
 
 import { Books } from './books.model';
 
@@ -15,19 +10,19 @@ import { Books } from './books.model';
 export class BookService {
    selectedBook:any= Books;
    books:Books[]=[];
-  // readonly baseURL="http://localhost:3000/book";
-  server_address: string = 'api';
+  readonly baseURL="http://localhost:3000/book";
+  // server_address: string = 'api';
 
 
  
   constructor( private http: HttpClient) { }
   postBook(book: Books){
-      // return this.http.post(this.baseURL,book)
-      return this.http.post<any>(`${this.server_address}/book`,book)
+      return this.http.post(this.baseURL,book)
+      // return this.http.post<any>(`${this.server_address}/book`,book)
   }
 getBookList(){
-  // return this.http.get(this.baseURL);
-  return this.http.get<any>(`${this.server_address}/book`)
+  return this.http.get(this.baseURL);
+  // return this.http.get<any>(`${this.server_address}/book`)
 
 }
 }

@@ -20,7 +20,7 @@ export class EditBookComponent implements OnInit {
   
   editBook(){
     this.booksService.editBook(this.bookItem)
-    console.log("hi for, editbook and the corresponding book name is " + this.bookItem.bookName);
+    console.log(" editbook and the corresponding book name is " + this.bookItem.bookName);
     alert("edited")
     this.router.navigate(['/book-list'])
   }
