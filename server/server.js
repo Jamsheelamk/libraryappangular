@@ -32,8 +32,8 @@ app.use(express.json());
 
 // hosting
 
-// const path = require('path');
-// app.use(express.static('./dist/client'));
+const path = require('path');
+app.use(express.static('./dist/client'));
 // app.use(express.static(__dirname + "/public"));
 
 app.use('/book',bookController);
@@ -261,9 +261,9 @@ app.post('/login',(req,res)=>{
 
 })
 
-// app.get('/*', function(req, res) {
-//     res.sendFile(path.join(__dirname + '/dist/client/index.html'));
-//    });
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/client/index.html'));
+   });
 
     app.listen(3000,function(){
         console.log('server ready at port 3000');
