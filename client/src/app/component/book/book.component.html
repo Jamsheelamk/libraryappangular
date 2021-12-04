@@ -22,7 +22,8 @@
                 </thead>
                 <tbody style="border: blue;border-width: 2px; color: white;background-color: black; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
                    <tr *ngFor='let author of authors'>
-                       <td><img [src]='author.imageUrl'
+                       <td><img *ngIf='showImage'
+                        [src]='author.imageUrl'
                         [title]='author.authorName'
                         [style.width.px]= 'imageWidth'
                         [style.margin.px]='imageMargin'>
